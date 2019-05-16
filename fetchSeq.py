@@ -23,10 +23,14 @@ Final_result_folderPath = "/home/pracheta/Documents/pracheta/phd2018/Data_comp_g
 
 #created output directory
 
+# Keep presets
+
 '''Create the output directory if it does not exist'''
 if not os.path.exists(Final_result_folderPath):
     os.mkdir(Final_result_folderPath)
     print("success")
+
+#
 
 '''Now
     1. Go through each file in hmm search folder
@@ -34,23 +38,35 @@ if not os.path.exists(Final_result_folderPath):
     3. find the corresponding amino acid sequences from AAseq_file
     4. Write them to the file
 '''
+
 for hmmSearch_resultFile in hmmSearch_resultFolder:
     bareFile = os.path.basename(hmmSearch_resultFile).replace("_output.txt", "")
     #bareFile = hmmSearch_resultFile.replace('_output.txt', '')
     print("bareFile:"+bareFile)
+
+    final_result_file = Final_result_folderPath+ bareFile + ".fsa"
+    print("final_result_file:"+final_result_file)
+
+    exists = os.path.isfile(final_result_file)
+    if exists:
+        print("Skipping file: "+bareFile+ " as it is already processed")
+        continue # if the final result already exist, then do not process it further
+
+    #search if this file is already searched or not
+
     seqFile = glob.glob(AAseq_folderPath + bareFile + ".*")#get fasta file with any extension (index is missing in the end [0] but shows error if I add that on)
     print(seqFile)
     if len(seqFile) == 0 :
         print("There's no fasta file corresponding to "+ bareFile)
         continue #Do not further process this file. Go to next file
-    elif
+    elif len(seqFile) > 1:
+        print("There are more than one file corresponding to "+ bareFile)
+        #it is ok but why?
 
     AAseq_file = seqFile[0]
     print("AAseq_file:", AAseq_file) #I removed + instead ,
     #AAseq_file = AAseq_folderPath + bareFile + ".fsa"
     #print("AAseq_file:", AAseq_file)
-    final_result_file = Final_result_folderPath+ bareFile + ".fsa"
-    print("Final_result_folderPath:"+Final_result_folderPath)
 
 
     finalResult = "" #initialize finalResult with empty string for new file
@@ -64,13 +80,14 @@ for hmmSearch_resultFile in hmmSearch_resultFolder:
                  #   if seq_record.id == ID:
                         #collectSequence = str(seq_record.seq)
                         #break #breaks  loop : for seq_record in SeqIO.parse(AAseq_file, "fasta"):
+
                 collectSequence = record_dict[ID]
+
                 entry = collectSequence.format("fasta")
                 #entry = ">"+ ID+ "\n"+ collectSequence +"\n"
                 print(entry)
                 finalResult = finalResult + entry
                 record_dict.close()
 
-    outfile = open("final_result_file", 'w')
-    outfile.write(finalResult)
-    outfile.close()
+    with open(final_result_file, 'w') as outfile:
+        outfile.write(finalResult)
