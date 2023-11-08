@@ -17,6 +17,13 @@ To accomplish this, I have opted to employ one of the popular linear models, nam
 
 
 
-
+Insights from Genome analysis:
+    1) Phylogenetic analysis reveals two major clades within Defensin gene of Diptera. The first clade encompasses dipteran species thriving in unclean environments, the second clade comprises Drosophilas, and Mosquitoes. This clustering suggests a shared environmental influence and the consequent parallel development of the defensin gene.
+       
+    2) Surprisingly, two families of flies, Calliphoridae and Sarcophagidae, which inhabit unclean environments, exhibit remarkable similarity in the structure of their defensin gene. This finding suggests parallel evolution of defensin genes in response to similar ecological pressures.
+       
+    3) The defensin gene in the mosquito family has undergone substantial evolutionary divergence from its ancestral form. Each mosquito species has strategically developed unique structural adaptations in its defensin gene, indicating species-specific evolutionary trajectories.
+       
+    4) Notably, species such as Stomoxys calcitrans and certain Muscidae (house flies) exhibit gene duplications in their defensin gene. The presence of gene duplications prompts further investigation into the underlying mechanisms and selective advantages driving this phenomenon.
 
 
